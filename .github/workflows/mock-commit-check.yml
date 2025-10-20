@@ -1,0 +1,35 @@
+name: Mock Commit Check
+
+# Trigger on push events to any branch
+on:
+  push:
+    branches:
+      - '**'  # Matches all branches
+
+jobs:
+  mock-commit-check:
+    name: Mock Commit Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Print start message
+        run: |
+          echo "🚀 Starting mock commit check..."
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Commit Message: ${{ github.event.head_commit.message }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Pusher: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+      
+      - name: Wait for 30 seconds
+        run: |
+          echo "⏳ Simulating work for 30 seconds..."
+          sleep 30
+      
+      - name: Print success message
+        run: |
+          echo "✅ Mock commit check completed successfully!"
+          echo "All checks passed for commit ${{ github.sha }}!"

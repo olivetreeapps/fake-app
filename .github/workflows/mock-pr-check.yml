@@ -1,0 +1,33 @@
+name: Mock PR Check
+
+# Trigger on pull request events
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  mock-pr-check:
+    name: Mock PR Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Print start message
+        run: |
+          echo "🚀 Starting mock PR check..."
+          echo "PR Number: ${{ github.event.pull_request.number }}"
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "Source Branch: ${{ github.head_ref }}"
+          echo "Target Branch: ${{ github.base_ref }}"
+      
+      - name: Wait for 30 seconds
+        run: |
+          echo "⏳ Simulating work for 30 seconds..."
+          sleep 30
+      
+      - name: Print success message
+        run: |
+          echo "✅ Mock PR check completed successfully!"
+          echo "All checks passed!"
